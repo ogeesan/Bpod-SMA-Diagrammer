@@ -1,7 +1,7 @@
 # Bpod-SMA-Diagrammer
-This repository allows Bpod users to build state diagrams using Mermaid.
+This repository contains `sma_diagram.m` which allows Bpod users to build state diagrams using Mermaid.
 
-What's this tool for? It's primary purpose is to visualise the state matricies. In this regard, it's useful for troubleshooting/developing a protocol, as well as the documentation and sharing of information about the trial structures.
+It's primary purpose is to visualise the state matricies. In this regard, it's useful for troubleshooting/developing a protocol, as well as the documentation and sharing of information about the trial structures.
 
 ## Usage
 ```matlab
@@ -9,15 +9,19 @@ sma = NewStateMachine()
 % ... [Your code using AddState() to build a state machine] ...
 
 [mermaid_text, sma_struct] = sma_diagram(sma);
+% this also prints the mermaid diagram into console by default
 
 ```
+
+Check `diagram_sma.m` for optional parameters (e.g. `diagram_sma(sma, 'display', false)`).
+
+`sma_struct` is a human-readable structure of the state matrix, which you may find useful to insert into `BpodSystem.Data` so that `SessionData` contains the matrix for later reference (if your protocol tends to undergo changes).
 
 ## A brief word on Mermaid
 [Mermaid](https://mermaid.js.org/intro/) is a "charting tool that renders Markdown-inspired text definitions to create and modify diagrams dynamically". The reason for its usefulness in the Bpod context is that it's wise to store a `readme.md` within each Bpod protocol file for documentation purposes, and having a schematic of the trial structure can be a useful way of sharing information about how it works.
 
-Here's Bpod's [`Examples/Protocols/Light/Light2AFC`](https://github.com/sanworks/Bpod_Gen2/blob/master/Examples/Protocols/Operant/Operant.m) turned into a mermaid diagram.
-
-For trial type 1:
+## Example of usage
+I added `sma_diagram(sma)` into Bpod's example protocol [`Examples/Protocols/Light/Light2AFC`](https://github.com/sanworks/Bpod_Gen2/blob/master/Examples/Protocols/Operant/Operant.m) (after `sma` construction Line 119 in the protocol). The first trial happened to be trial type 1, and the raw output embedded in markdown looks like this:
 ```mermaid
 stateDiagram-v2
 WaitForPoke: WaitForPoke
@@ -55,7 +59,7 @@ DrinkingGrace: DrinkingGrace
 	DrinkingGrace --> Drinking: Port3In
 ```
 
-The first few lines of code used to build this diagram look like the following:
+The first few lines of text used to build this diagram (as they appear in the markdown file) look like the following:
 
 ```
 stateDiagram-v2
@@ -73,4 +77,5 @@ WaitForResponse: WaitForResponse\nPWM1 255
 	WaitForResponse --> Punish: Port3In
 ```
 
-Mermaid is rendered by GitHub when presented in Markdown files. This is the raw output from my tool, built from a single trials' state matrix. With some small tweaks, it can easily represent the entire task with its different contingencies more generally.
+
+Mermaid is rendered by GitHub when presented in Markdown files. This is the raw output from my tool, built from a single trials' state matrix. With some small tweaks, it can represent the entire task with its different contingencies more generally. To do that, you'll have to refer to the [documentation on state diagrams](https://mermaid.js.org/syntax/stateDiagram.html). For example, in the above diagram I'd modify the transitions from `WaitForResponse` so that there is a line with `Port3In` to `RightRewardDelay`, and the connection to `Punish` could read "`Port1In or Port3In`". There are other visual tools available for the state diagram that you might like to look into if you have complex contingencies.

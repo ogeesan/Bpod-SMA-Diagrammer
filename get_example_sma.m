@@ -1,4 +1,13 @@
 function sma = get_example_sma(task)
+% sma = get_example_sma(task)
+% Retrieve an example sma without having to start a protocol
+%
+% There are some benefits to building state machines in functions, in part because
+% developing and troubleshooting them could be done outside of having to run
+% the protocol. Here's a sample of how that could be done.
+%
+% Tasks: 'discrimination', 'detection', 'test'
+
 if strcmp(task,'discrimination')
     actions.image_ttl = {'BNCState', 1};
     actions.lick = 'Port1In';
