@@ -4,15 +4,25 @@ This repository contains `sma_diagram.m` which allows Bpod users to build state 
 [Bpod](https://github.com/sanworks/Bpod_Gen2) is an open source tool for rodent behaviour. MATLAB is used to interface with a state machine, and a series of functions are used to generate `sma`, a state matrix that is sent to the state machine. Diagrams of the protocol are often produced by hand by looking at the MATLAB code used to create `sma`, but with `sma_diagram` a schematic of the state matrix can be reconstructed exactly using `sma` itself.
 
 ```mermaid
+---
+title: The value of Bpod-SMA-Diagrammer
+---
 stateDiagram-v2
-Stimulus
-    [*] --> Stimulus
-    Stimulus --> WaitForPoke
-WaitForPoke
-    WaitForPoke --> Hit: lick left
-    WaitForPoke --> Miss: lick right
-Hit --> [*]
-Miss --> [*]
+write: Find Bpod Protocol
+confused: Be confused about structure
+draw: Janky troubleshoot
+usesma: Use sma_diagram.m
+understand: See and understand trial structure
+
+write --> confused
+confused --> draw
+draw --> confused
+confused --> usesma
+usesma --> understand
+[*] --> write
+understand --> [*]
+
+ 
 ```
 
 ## Usage
