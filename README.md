@@ -54,7 +54,7 @@ The reason for its usefulness in the Bpod context is that it's wise to store a `
 The other reason to use Mermaid, and certainly why I chose to use it, is that it passes off all of the complexities of visual diagrams off to a 3rd party because making it manually ourselves would be a bit of a pain. Mermaid isn't exactly pretty, but it's very functional and quick to modify if needed.
 
 ## Example of usage
-I added `sma_diagram(sma)` into Bpod's example protocol [`Examples/Protocols/Light/Light2AFC`](https://github.com/sanworks/Bpod_Gen2/blob/master/Examples/Protocols/Operant/Operant.m) (after `sma` construction Line 119 in the protocol). The first trial happened to be trial type 1, and the raw output (that I copied from MATLAB's Command Window) embedded in markdown looks like this:
+I added `sma_diagram(sma)` into Bpod's example protocol [`Examples/Protocols/Light/Light2AFC`](https://github.com/sanworks/Bpod_Gen2/blob/master/Examples/Protocols/Light/Light2AFC/Light2AFC.m) (after `sma` construction Line 119 in the protocol). The first trial happened to be trial type 1, and the raw output (that I copied from MATLAB's Command Window) embedded in markdown looks like this:
 ```mermaid
 stateDiagram-v2
 WaitForPoke: WaitForPoke
